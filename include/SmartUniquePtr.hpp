@@ -1,28 +1,28 @@
-// uniquePtr.hpp
+// SmartUniquePtr.hpp
 #pragma once
 #include <utility>
 
 template <typename T>
-class uniquePtr
+class SmartUniquePtr
 {
 private:
     T *ptr;
 
 public:
-    explicit uniquePtr(T *p = nullptr) : ptr(p) {}
-    ~uniquePtr() { delete ptr; }
+    explicit SmartUniquePtr(T *p = nullptr) : ptr(p) {}
+    ~SmartUniquePtr() { delete ptr; }
 
     // Disable copy
-    uniquePtr(const uniquePtr &) = delete;
-    uniquePtr &operator=(const uniquePtr &) = delete;
+    SmartUniquePtr(const SmartUniquePtr &) = delete;
+    SmartUniquePtr &operator=(const SmartUniquePtr &) = delete;
 
     // Move semantics
-    uniquePtr(uniquePtr &&other) noexcept : ptr(other.ptr)
+    SmartUniquePtr(SmartUniquePtr &&other) noexcept : ptr(other.ptr)
     {
         other.ptr = nullptr;
     }
 
-    uniquePtr &operator=(uniquePtr &&other) noexcept
+    SmartUniquePtr &operator=(SmartUniquePtr &&other) noexcept
     {
         if (this != &other)
         {
